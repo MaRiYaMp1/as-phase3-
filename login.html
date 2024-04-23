@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            background-image: url('https://wallpapercave.com/wp/wp9764012.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        #login-box {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        #login-box h2 {
+            margin-top: 0;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        #login-box input[type="text"],
+        #login-box input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+
+        #login-box button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        #video-container {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+
+        #video {
+            width: 100%;
+            height: auto;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 5px;
+        }
+
+        .input-error {
+            border: 1px solid #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<div id="login-box">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="validateLogin()">Login</button>
+    <div id="video-container">
+        <video id="video" autoplay></video>
+    </div>
+</div>
+
+<script defer src="face-api.min.js"></script>
+<script defer src="script.js"></script>
+
+<script>
+    let attempts = 0;
+
+    function validateLogin() {
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        // Here, you should replace 'your_username' and 'your_password' with your actual credentials
+        if (((username === 'mariyam') || (username==='deepu') || (username === 'taylor')) && (password === 'mariyam@123') || (password === 'deepika@123') || (password === 'taylor@123')) {
+            // Username and password are correct
+            alert('Login successful!');
+            window.location.href = "welcome.html";
+        } else {
+            attempts++;
+            if (attempts >= 3) {
+                alert('Please attempt again after 24 hours.');
+                setTimeout(function () {
+                    window.close();
+                }, 2000); // Close the window after 2 seconds
+            } else {
+                alert('Invalid credentials. Attempts left: ' + (3 - attempts));
+            }
+        }
+    }
+</script>
+
+<script>
+    const video = document.getElementById("video");
+
+    navigator.mediaDevices
+        .getUserMedia({
+            video: true,
+            audio: false,
+        })
+        .then((stream) => {
+            video.srcObject = stream;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+</script>
+
+</body>
+</html>
